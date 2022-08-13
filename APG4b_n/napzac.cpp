@@ -3,28 +3,32 @@
 #include <algorithm>
 using namespace std;
 
-// 入力
-int n, W;
-int weight[110], value[110];
-
 // DPテーブル
 int dp[110][10010];
+int N;
+int A[10010];
+
+int rec(int i) {
+	int result;
+	cout << "i = "<< i << endl;
+	if (i >= N) {
+		return 0;
+	} else {
+		cout << "----------start= "<<i <<"---------"<<endl;
+		cout << "result = " << result << " A[" << i << "] = " << A[i] << endl;
+		int ans1 = rec(i+1);
+		int ans2= rec(i+1)+A[i];
+		cout << "ans1 = " << ans1 << " ans2 = " << ans2 << endl;
+		result = max(ans1, ans2);
+		cout << "result = " << result << " A[" << i << "] = " << A[i] << endl;
+		cout << "----------end= "<<i <<"---------"<<endl;
+	}
+	return result;
+}
 
 int main() {
-  cin >> n >> W;
-  for (int i = 0; i < n; ++i) cin >> value[i] >> weight[i];
-
-  // DP初期条件: dp[0][w] = 0
-  for (int w = 0; w <= W; ++w) dp[0][w] = 0;
-
-  // DPループ
-  for (int i = 0; i < n; ++i) {
-    for (int w = 0; w <= W; ++w) {
-		cout << "p[i][w-weight[i]] = " << p[i][w-weight[i]] << endl;
-		if (w >= weight[i]) dp[i+1][w] = max(dp[i][w-weight[i]] + value[i], dp[i][w]);
-		else dp[i+1][w] = dp[i][w];
-    }
-  }
-
-  cout << dp[n][W] << endl;
+	cin >> N;
+	for (int i=0; i< N; i++)
+		cin >> A[i];
+	cout << rec(0) << endl;
 }
