@@ -4,6 +4,11 @@
 		"iostream": "cpp",
 		"climits": "cpp",
 		"ostream": "cpp",
-		"deque": "cpp"
+		"deque": "cpp",
+		"iosfwd": "cpp",
+		"__tree": "cpp",
+		"map": "cpp",
+		"set": "cpp",
+		"algorithm": "cpp"
 	}
 }
