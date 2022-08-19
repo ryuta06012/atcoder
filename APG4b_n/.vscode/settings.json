@@ -3,6 +3,7 @@
 		"bitset": "cpp",
 		"iostream": "cpp",
 		"climits": "cpp",
-		"ostream": "cpp"
+		"ostream": "cpp",
+		"deque": "cpp"
 	}
 }
