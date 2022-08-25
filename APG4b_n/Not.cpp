@@ -49,5 +49,4 @@ int main() {
 	if (Ans == INT_MAX)
 		Ans = -1;
 	cout << Ans << endl;
-
 }
