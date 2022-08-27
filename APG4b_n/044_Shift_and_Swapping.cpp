@@ -3,6 +3,7 @@
 #include <vector>
 #include <set>
 #include <algorithm>
+#include <cstdlib> 
 using namespace std;
 
 int main() {
@@ -20,18 +21,18 @@ int main() {
 	}
 	int shift = 0;
 	for (int i=0; i<Q; i++) {
+		int x;
+		int y;
+		x = abs(((T.at(i).at(1) - 1) + shift) % N);
+		y = abs(((T.at(i).at(2) - 1) + shift) % N);
 		if (T.at(i).at(0) == 1) {
-			swap(arry.at(((T.at(i).at(1) - 1) + shift) % N), arry.at(((T.at(i).at(2) - 1) + shift) % N));
-			for (int x=0; x<N; x++)
-				cout << arry.at(x) << " ";
-			cout << endl;
+			swap(arry.at(x), arry.at(y));
 		}
 		else if (T.at(i).at(0) == 2) {
-			shift = (shift + N - 1) % N;
-			cout << "shift = " << shift << endl;
+			shift = (shift + N -1) % N;
 		}
 		else
-			cout << arry.at(((T.at(i).at(1) - 1) + shift) % N) << endl;
+			cout << arry.at(x) << endl;
 	}
 	return 0;
 }
