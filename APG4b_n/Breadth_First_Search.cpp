@@ -7,76 +7,41 @@
 #include <queue>
 using namespace std;
 
-/* int main() {
-    int V, E;
-    cin >> V >> E;
-    int s, t;
-    cin >> s >> t;
-
-    vector<vector<int> > G(V);
-    for (int i = 0; i < E; i++) {
-        int a, b;
-        cin >> a >> b;
-        G[a].push_back(b);
-        // G[b].push_back({a});
-    }
-    vector<bool> seen(V, false);  // 既に見たことがある頂点か記録する
-
-    queue<int> que;
-    que.emplace(s);  // sから探索する
-    seen[s] = true;
-    while (que.size() != 0) {     // 幅優先探索
-        int state = que.front();  // 現在の状態
-		cout << "state = " << state << endl;
-        que.pop();
-        for (auto next : G[state]) {
-			cout << "next = " << next << endl;
-            if (!seen[next]) {  // 未探索の時のみ行う
-                seen[next] = true;
-                que.emplace(next);  //次の状態をqueueへ格納
-            }
-        }
-		cout << "------------" << endl;
-    }
-
-    if (seen[t]) {
-        cout << "yes" << endl;
-    } else {
-        cout << "no" << endl;
-    }
-    return 0;
-} */
+const int INF = -1;
 
 int main() {
-	int V, E;
-	cin >> V >> E;
-	int s,t;
-	cin >> s >> t;
+	int G;
+	cin >> G;
+	int u, k;
 
-	vector<vector<int> > G(V);
-	for (int i=0; i<E; i++) {
-		int a,b;
-		cin >> a >> b;
-		G[a].push_back(b);
-	}
-	vector<bool> seet(V, false);
-	queue<int> que;
-	que.emplace(s);
-	seet[s] = true;
+	vector<vector<int>> t(G);
 
-	while (que.size() != 0)
-	{
-		int state = que.front();
-		que.pop();
-		for (int i=0; i< G[state].size(); i++) {
-			if (!seet[G[state][i]]) {
-				seet[G[state][i]] = true;
-				que.emplace(G[state][i]);
-			}
+	for (int i=0; i<G; i++) {
+		cin >> u >> k;
+		for (int j=0; j<k; j++) {
+			int v;
+			cin >> v;
+			t[u-1].push_back(v);
 		}
 	}
-	if (seet[t])
-		cout << "yes" << endl;
-	else
-		cout << "false" << endl;
+	for (int i=0; i<G; i++) {
+		vector<int> seen(G, INF);
+		queue<int> que;
+		que.emplace(0);
+		seen[0] = 0;
+		while (que.size() != 0)
+		{
+			int state = que.front();
+			que.pop();
+			if (state == i)
+				break;
+			for (auto next : t[state]) {
+				if (seen[next-1] != INF) continue;
+				seen[next-1] = seen[state] + 1;
+				que.emplace(next-1);
+			}
+		}
+		cout << i+1 << " " << seen[i] << endl;
+	}
+	return 0;
 }
